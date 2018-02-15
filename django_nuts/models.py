@@ -17,10 +17,7 @@ class NUTS(models.Model):
 
     @cached_property
     def laus(self):
-        if self.level == 0:
-            return LAU.objects.filter(nuts0_id=self.code)
-        else:
-            return LAU.objects.filter(nuts_id__startswith=self.code)
+        return LAU.objects.filter(nuts__code__startswith=self.code)
 
 
 class LAU(models.Model):
