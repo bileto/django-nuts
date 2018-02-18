@@ -25,7 +25,7 @@ def load_sk_nuts():
         try:
             code = row[0]
             level = len(code) - 2
-            name = row[level + 1]
+            name = row[level + 1].replace('Okres ', '')
         except IndexError:
             continue
         else:
