@@ -21,6 +21,11 @@ NUTS_URL = os.environ.get(
     '?TargetUrl=ACT_OTH_CLS_DLD&StrNom=NUTS_2016L&StrFormat=CSV&StrLanguageCode=EN&IntKey=&IntLevel=&bExport='
 )
 
+NUTS_OTHER_URL = os.environ.get(
+    'NUTS_OTHER_URL',
+    'http://ec.europa.eu/eurostat/documents/345175/7773495/Statistical-Regions.xlsx',
+)
+
 LAU_URL = os.environ.get(
     'LAU_URL',
     'http://ec.europa.eu/eurostat/documents/345175/501971/EU-28_LAU_2017_NUTS_2016.xlsx',
@@ -37,7 +42,7 @@ def load_nuts(*country_codes):
         level = len(code) - 2
         name = record['Description']
 
-        # skip records not matching base_code and records containing NUTS in the name
+        # skip records not matching country_codes and records containing NUTS in the name
         if country_codes and code[:2] not in country_codes or 'NUTS' in name:
             continue
 
@@ -48,6 +53,38 @@ def load_nuts(*country_codes):
                 updated += 1
         else:
             nuts[code] = NUTS.objects.create(code=code, name=name, level=level)
+            created += 1
+    logger.info('Created %d NUTS, updated %d', created, updated)
+
+
+def load_other_nuts(*country_codes):
+    data = get_remote_data(NUTS_OTHER_URL)
+
+    nuts = dict()
+    created, updated = 0, 0
+    for row in data['SR'][1:]:
+        try:
+            code, name = row[1:3]
+        except ValueError:
+            continue
+
+        country_code = code[:2]
+
+        # skip records not matching country_codes
+        if country_codes and country_code not in country_codes:
+            continue
+
+        # get existing NUTS
+        if country_code not in nuts:
+            nuts[country_code] = {n.code: n for n in NUTS.objects.filter(code__startswith=country_code).iterator()}
+
+        if code in nuts[country_code]:
+            if nuts[country_code][code].name != name:
+                nuts[country_code][code].name = name
+                nuts[country_code][code].save()
+                updated += 1
+        else:
+            nuts[country_code][code] = NUTS.objects.create(code=code, name=name, level=len(code) - 2)
             created += 1
     logger.info('Created %d NUTS, updated %d', created, updated)
 

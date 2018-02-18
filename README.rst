@@ -35,10 +35,10 @@ You may load the data manually from the shell (``python manage.py shell``)
     from django_nuts import load_nuts, load_lau
 
     # load all NUTS and LAU (note that nuts must be loaded first)
-    load_nuts(), load_lau()
+    load_nuts(), load_ohter_nuts(), load_lau()
 
     # load NUTS and LAU for some particular countries
-    load_nuts('CZ', 'SK'), load_lau('CZ', 'SK')
+    load_nuts('CZ', 'SK'), load_other_nuts('IS'), load_lau('CZ', 'SK')
 
     # load NUTS and LAU using celery task (requires celery)
     from django_nuts.tasks import load_nuts, load_lau
