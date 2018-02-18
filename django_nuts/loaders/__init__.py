@@ -3,7 +3,7 @@ import os
 from csv import DictReader
 from io import StringIO
 
-from .models import LAU, NUTS
+from ..models import LAU, NUTS
 
 try:
     # python3

@@ -1,19 +1,19 @@
 import logging
 import os
 
-from .loaders import get_remote_data
-from .models import LAU, NUTS
+from . import get_remote_data
+from ..models import LAU, NUTS
 
 logger = logging.getLogger(__name__)
 
-CZ_NUTS4_URL = os.environ.get(
-    'CZ_NUTS4_URL',
+CZ_NUTS4_LAU_URL = os.environ.get(
+    'CZ_NUTS4_LAU_URL',
     'https://www.czso.cz/documents/10180/23208674/struktura_uzemi_cr_1_1_2016_az_1_1_2018.xlsx',
 )
 
 
-def load_cz_nuts4():
-    data = get_remote_data(CZ_NUTS4_URL)
+def load_cz_nuts4_lau():
+    data = get_remote_data(CZ_NUTS4_LAU_URL)
 
     # take last sheet
     sheet = data[list(data.keys())[-1]]
