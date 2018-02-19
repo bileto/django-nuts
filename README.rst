@@ -48,3 +48,31 @@ You may load the data manually from the shell (``python manage.py shell``)
     # load CZ NUTS4 + LAU
     from django_nuts.loaders.cz_nuts4_lau import load_cz_nuts4_lau
     load_cz_nuts4_lau()
+
+
+Filter objects by NUTS in Django Admin Site
+-------------------------------------------
+
+``your_app/models.py``:
+
+.. code:: python
+
+    from django.db import models
+    from django_nuts.models import NUTS
+
+    class Place(models.Model):
+        name = models.CharField(max_length=255)
+        nuts = models.ForeignKey(NUTS)
+
+
+``your_app/admin.py``:
+
+.. code:: python
+
+    from django.contrib import admin
+    from django_nuts.admin import NUTSRelatedOnlyFieldListFilter
+
+    class PlaceAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_filter = (('nuts', NUTSRelatedOnlyFieldListFilter),)
+    raw_id_fields = ('nuts',)
