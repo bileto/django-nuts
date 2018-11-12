@@ -24,7 +24,7 @@ class LAU(models.Model):
     code = models.CharField(max_length=15, unique=True)
     name = models.CharField(max_length=250)
     local_name = models.CharField(max_length=250)
-    nuts = models.ForeignKey(NUTS, related_name='+')
+    nuts = models.ForeignKey(NUTS, on_delete=models.CASCADE, related_name='+')
 
     class Meta:
         ordering = ('code',)
