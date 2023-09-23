@@ -12,10 +12,10 @@ setup(
     version='2.0.0',
     description='Django application providing database of European NUTS and LAU',
     long_description=long_description,
-    author='Jakub Dorňák',
-    author_email='jakub.dornak@misli.cz',
+    author='Bileto',
+    author_email='support@bileto.com',
     license='BSD',
-    url='https://github.com/misli/django-nuts',
+    url='https://github.com/bileto/django-nuts',
     packages=find_packages(),
     install_requires=[
         'django-admin',
