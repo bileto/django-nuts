@@ -1,8 +1,8 @@
 import logging
 import os
 
-from . import get_remote_data
 from ..models import LAU, NUTS
+from . import get_remote_data
 
 logger = logging.getLogger(__name__)
 

@@ -2,6 +2,7 @@ import logging
 import os
 from csv import DictReader
 from io import StringIO
+from urllib.request import urlopen
 
 from ..models import LAU, NUTS
 
@@ -132,8 +133,9 @@ def load_lau(*country_codes):
 
 
 def get_remote_data(url, suffix='.xlsx'):
-    from pyexcel_xls import get_data
     from tempfile import NamedTemporaryFile
+
+    from pyexcel_xls import get_data
 
     with NamedTemporaryFile(suffix=suffix) as f:
         with urlopen(url) as response:

@@ -3,8 +3,8 @@ import os
 
 import lxml.html
 
-from . import urlopen
 from ..models import NUTS
+from . import urlopen
 
 logger = logging.getLogger(__name__)
 
