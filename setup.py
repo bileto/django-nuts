@@ -10,7 +10,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 
 setup(
     name='django-nuts',
-    version='1.4.1',
+    version='2.0.0',
     description='Django application providing database of European NUTS and LAU',
     long_description=long_description,
     author='Jakub Dorňák',
@@ -31,7 +31,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.10',
     ],
 )
