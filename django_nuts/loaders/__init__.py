@@ -88,8 +88,8 @@ def load_lau(*country_codes):
         country_codes = (key for key in data.keys() if len(key) == 2)
     for country_code in country_codes:
         sheet = data[country_code]
-        nuts = {n.code: n for n in NUTS.objects.filter(code__startswith=country_code).iterator()}
-        laus = {l.code: l for l in LAU.objects.filter(code__startswith=country_code).iterator()}
+        nuts = {n_nuts.code: n_nuts for n_nuts in NUTS.objects.filter(code__startswith=country_code).iterator()}
+        laus = {l_lau.code: l_lau for l_lau in LAU.objects.filter(code__startswith=country_code).iterator()}
         created, updated = 0, 0
         for row in sheet[1:]:
             # handle exceptions in data

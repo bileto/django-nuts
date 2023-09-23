@@ -18,8 +18,8 @@ def load_cz_nuts4_lau():
     # take last sheet
     sheet = data[list(data.keys())[-1]]
 
-    nuts = {n.code: n for n in NUTS.objects.filter(code__startswith='CZ').iterator()}
-    laus = {l.code: l for l in LAU.objects.filter(code__startswith='CZ').iterator()}
+    nuts = {n_nuts.code: n_nuts for n_nuts in NUTS.objects.filter(code__startswith='CZ').iterator()}
+    laus = {l_lau.code: l_lau for l_lau in LAU.objects.filter(code__startswith='CZ').iterator()}
     nuts_created, nuts_updated, lau_created, lau_updated = 0, 0, 0, 0
     for row in sheet[2:]:
         lau_code, lau_name = row[0:2]
