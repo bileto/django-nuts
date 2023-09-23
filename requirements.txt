@@ -1,0 +1,5 @@
+setuptools
+django
+django-admin
+lxml
+pyexcel-xls
