@@ -5,14 +5,6 @@ from io import StringIO
 
 from ..models import LAU, NUTS
 
-try:
-    # python3
-    from urllib.request import urlopen
-except ImportError:
-    # python2
-    from urllib import urlopen
-
-
 logger = logging.getLogger(__name__)
 
 NUTS_URL = os.environ.get(

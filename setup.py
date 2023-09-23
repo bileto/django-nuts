@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import os
 
@@ -19,13 +18,15 @@ setup(
     url='https://github.com/misli/django-nuts',
     packages=find_packages(),
     install_requires=[
-        'pyexcel-xls'
+        'django-admin',
+        'lxml',
+        'pyexcel-xls',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 4.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
